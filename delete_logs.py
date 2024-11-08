@@ -1,6 +1,8 @@
 import os
 
 def delete_logs(dir):
-    for file in os.listdir(dir)[:-3]:
+    files = os.listdir(dir)[:-3]
+    files.sort()
+    for file in : files
         os.remove(f'{dir}/{file}')
 
