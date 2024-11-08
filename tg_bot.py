@@ -38,8 +38,8 @@ def click(message):
         return start(message)  # Возвращаем в меню, если состояние не соответствует
     
     if message.text == 'Отобразить графики в чате':
-        last_file = os.listdir('D:/DataPy/DataTelegramBot/images')[0]
-        file = open('D:/DataPy/DataTelegramBot/images/' + last_file, 'rb')
+        last_file = os.listdir(f'{dirname}/DataTelegramBot/images')[0]
+        file = open(f'{dirname}/DataTelegramBot/images/' + last_file, 'rb')
         bot.send_photo(message.chat.id, file)
         bot.register_next_step_handler(message, click)
 
@@ -50,8 +50,8 @@ def click(message):
         bot.register_next_step_handler(message, click)
 
     elif message.text == 'Получить данные в формате txt':
-        last_file = os.listdir('D:/DataPy/DataTelegramBot/reports')[0]
-        file = open('D:/DataPy/DataTelegramBot/reports/' + last_file, 'rb')
+        last_file = os.listdir(f'{dirname}/DataTelegramBot/reports')[0]
+        file = open(f'{dirname}/DataTelegramBot/reports/' + last_file, 'rb')
         bot.send_document(message.chat.id, file)
         bot.register_next_step_handler(message, click)
 
