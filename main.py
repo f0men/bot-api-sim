@@ -36,7 +36,7 @@ CLIENT_KEY = os.getenv('CLIENT_KEY') # вытаскиваем пароль кл�
 
 # настройка логгинга
 logging.basicConfig(
-    filename=f'{dirname}\logs\{datetime.datetime.strftime(date.today()-timedelta(days=1),"%Y-%m-%d")}.log',
+    filename=f'{dirname}/logs/{datetime.datetime.strftime(date.today()-timedelta(days=1),"%Y-%m-%d")}.log',
     filemode='a',  # append логов
     format='%(asctime)s %(name)s %(levelname)s: %(message)s',
     level=logging.INFO)
@@ -60,13 +60,13 @@ db = DataBase(
 
 data_add_to_database(data, db) # Добавление данных в базу
 
-delete_logs(f'{dirname}\logs') # удаление log-файлов, которым больше 3-х дней
+delete_logs(f'{dirname}/logs') # удаление log-файлов, которым больше 3-х дней
 
 lst_for_google_sheets_and_bots = [len(data), len(list(filter(lambda x: x['is_correct']==True, data))), len({i.get('lti_user_id') for i in data})] # формирование ежедневных метрик для отчета
 write_daily_info(lst_for_google_sheets_and_bots) # изменение информации в Google Sheets
 message_to_emp([str(EMAIL_ADDRESS['USERS'])])
 
-Preparer.delete_photo_reports(f'{dirname}\\DataTelegramBot\\images') #удаление устаревшего изображения графика
-Preparer.delete_photo_reports(f'{dirname}\\DataTelegramBot\\reports') # удаление устаревшего текстового файла
-Preparer.create_file_daily_activity(lst_for_google_sheets_and_bots,f'{dirname}\\DataTelegramBot\\reports') # создание файла для отправки ботом
-Preparer.make_plot(lst_for_google_sheets_and_bots, f'{dirname}\\DataTelegramBot\\images') # создание изображения с графиком ддля отправки ботом
+Preparer.delete_photo_reports(f'{dirname}/DataTelegramBot/images') #удаление устаревшего изображения графика
+Preparer.delete_photo_reports(f'{dirname}/DataTelegramBot/reports') # удаление устаревшего текстового файла
+Preparer.create_file_daily_activity(lst_for_google_sheets_and_bots,f'{dirname}/DataTelegramBot/reports') # создание файла для отправки ботом
+Preparer.make_plot(lst_for_google_sheets_and_bots, f'{dirname}/DataTelegramBot/images') # создание изображения с графиком ддля отправки ботом
